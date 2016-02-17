@@ -5,18 +5,18 @@ defmodule ToDo.ItemsFormatter do
     |> append_to_do_heading
   end
 
-  def add_indexes_to_items_list(items) do
+  defp add_indexes_to_items_list(items) do
     Enum.with_index(items)
   end
 
-  def convert_items_list_for_display(items_with_index) do
+  defp convert_items_list_for_display(items_with_index) do
     Enum.map_join(items_with_index, "\n", fn(item_tuple) ->
       {item, number} = item_tuple
       "[#{number+1}] #{item}"
     end)
   end
 
-  def append_to_do_heading(display_items) do
+  defp append_to_do_heading(display_items) do
     "To Do List: \n#{display_items}"
   end
 end
