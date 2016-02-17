@@ -1,11 +1,9 @@
 defmodule ToDo.ToDo do
-  import ToDo.CommandMenuFormatter
-  import ToDo.ItemsFormatter
+  import ToDo.ConsoleIOHandler
 
   def run do
     items = ["Go to yoga tonight",
              "make to do list app"]
-    IO.puts items_for_display(items) <> "\n" <>
-            menu_options_for_display <> "\n"
+    display_to_do_list_and_cheatsheet(items)
   end
 end
