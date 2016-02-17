@@ -1,4 +1,4 @@
-# ToDo
+# Elixir To Do List
 
 **TODO: Add description**
 
