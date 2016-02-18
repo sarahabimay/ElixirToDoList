@@ -4,25 +4,20 @@ defmodule ConsoleDisplayTest do
   import ToDo.ConsoleDisplay
   doctest ToDo
 
-  setup do
-    menu =
-      "To Do List:\n\n" <>
-      "Commands Cheatsheet:\n" <>
-      "[aA] Add New To-Do Items\n" <>
-      "[bB] List All Items\n" <>
-      "[cC<item_number>] Edit Item\n" <>
-      "[dD<item_number>] Delete Item\n" <>
-      "[eE] Exit\n\n"
-
-      {:ok, menu_options: menu}
-  end
-
-  test "display empty To-Do list and Command cheatsheet", context do
+  test "display contains To Do list" do
     result = capture_io fn ->
       display_to_do_list_and_cheatsheet([])
     end
 
-    assert result == context[:menu_options]
+    assert String.contains?(result, "To Do List")
+  end
+
+  test "display contains Command Cheatsheet" do
+    result = capture_io fn ->
+      display_to_do_list_and_cheatsheet([])
+    end
+
+    assert String.contains?(result, "Commands Cheatsheet")
   end
 
   test "display To-Do list with item" do
