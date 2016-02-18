@@ -6,10 +6,10 @@ defmodule MenuOptionsFormatterTest do
   setup do
     menu =
       "Commands Cheatsheet:\n" <>
-      "[aA] Add New To-Do Items\n" <>
-      "[bB] List All Items\n" <>
-      "[cC<item_number>] Edit Item\n" <>
-      "[dD<item_number>] Delete Item\n" <>
+      "[aA] Add New To-Do Tasks\n" <>
+      "[bB] List All Tasks\n" <>
+      "[cC<task_number>] Edit Task\n" <>
+      "[dD<task_number>] Delete Task\n" <>
       "[eE] Exit\n"
 
       {:ok, menu_options: menu}

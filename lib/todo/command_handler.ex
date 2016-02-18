@@ -1,6 +1,5 @@
 defmodule ToDo.CommandHandler do
   import ToDo.ConsoleDisplay
-  import ToDo.MenuOptionsFormatter
 
   def action_command(command) do
     command_upper = String.capitalize(command)

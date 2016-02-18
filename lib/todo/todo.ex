@@ -1,8 +1,8 @@
 defmodule ToDo.ToDo do
-  import ToDo.ConsoleDisplay
+  import ToDo.ToDoListManager
 
   def run do
     items = []
-    display_to_do_list_and_cheatsheet(items)
+    task_manager(items)
   end
 end
