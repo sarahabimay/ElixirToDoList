@@ -1,9 +1,8 @@
 defmodule ToDo.ToDo do
-  import ToDo.ConsoleIOHandler
+  import ToDo.ConsoleDisplay
 
   def run do
-    items = ["Go to yoga tonight",
-             "make to do list app"]
+    items = []
     display_to_do_list_and_cheatsheet(items)
   end
 end
