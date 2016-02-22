@@ -18,7 +18,7 @@ defmodule CommandHandlerTest do
   test "ignores unrecognized command" do
     invalid_command = "9"
     result = capture_io(fn ->
-      input = action_command(invalid_command)
+      action_command(invalid_command)
     end)
     assert result == "Sorry, I don't recognize that command.\n"
   end
