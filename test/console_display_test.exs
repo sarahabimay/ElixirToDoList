@@ -4,37 +4,32 @@ defmodule ConsoleDisplayTest do
   import ToDo.ConsoleDisplay
   doctest ToDo
 
-  test "display contains To Do list" do
+  test "contains To Do List heading" do
     result = capture_io fn ->
       display_to_do_list_and_cheatsheet([])
     end
-
     assert String.contains?(result, "To Do List")
   end
 
-  test "display contains Command Cheatsheet" do
+  test "contains Commands Cheatsheet heading" do
     result = capture_io fn ->
       display_to_do_list_and_cheatsheet([])
     end
-
     assert String.contains?(result, "Commands Cheatsheet")
   end
 
   test "display To-Do list with task" do
-    todo_task = "Go to yoga tonight"
+    todo_tasks = ["Go to yoga tonight"]
     result = capture_io fn ->
-      display_to_do_list_and_cheatsheet([todo_task])
+      display_to_do_list_and_cheatsheet(todo_tasks)
     end
-
-    assert String.contains?(result, "[1] #{todo_task}\n")
+    assert String.contains?(result, "[1] #{todo_tasks}\n")
   end
 
   test "display receives input from prompt" do
     add_command = "a"
-    result = capture_io([input: add_command, capture_prompt: false], fn ->
-      input = prompt_for_command
-      IO.write input
+    capture_io([input: add_command, capture_prompt: false], fn ->
+      assert prompt_for_command == add_command
     end)
-    assert result == "a"
   end
 end

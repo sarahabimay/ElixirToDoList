@@ -7,7 +7,7 @@ defmodule ToDo.TasksFormatter do
   end
 
   defp numbered_tasks(tasks) do
-    Enum.with_index(tasks)
+    Enum.with_index(List.flatten(tasks))
   end
 
   defp todo_list_for_display(tasks_with_index) do
@@ -17,7 +17,7 @@ defmodule ToDo.TasksFormatter do
   end
 
   defp append_to_do_heading(display_tasks) do
-    "To Do List:\n#{display_tasks}"
+    "\nTo Do List:\n#{display_tasks}"
   end
 
   defp append_newline(command_display) do

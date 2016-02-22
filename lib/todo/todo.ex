@@ -1,8 +1,8 @@
 defmodule ToDo.ToDo do
-  import ToDo.ToDoListManager
+  import ToDo.ToDoListApp
 
   def run do
-    items = []
-    task_manager(items)
+    tasks = []
+    todo_list_run(tasks)
   end
 end
