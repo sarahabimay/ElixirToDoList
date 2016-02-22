@@ -1,21 +1,20 @@
 defmodule ToDoTest do
   use ExUnit.Case
   import ExUnit.CaptureIO
+  import ToDo.ToDo
   doctest ToDo
 
-  test "display items list and commands" do
+  test "display includes To Do list" do
     result = capture_io fn ->
-      ToDo.ToDo.run
+      run
     end
-    assert result ==
-      "To Do List:\n" <>
-      "[1] Go to yoga tonight\n" <>
-      "[2] make to do list app\n" <>
-      "Commands Cheatsheet:\n" <>
-      "[aA] Add New To-Do Items\n" <>
-      "[bB] List All Items\n" <>
-      "[cC<item_number>] Edit Item\n" <>
-      "[dD<item_number>] Delete Item\n" <>
-      "[eE] Exit\n\n"
+    assert String.contains?(result, "To Do List:\n")
+  end
+
+  test "display includes Commands menu" do
+    result = capture_io fn ->
+      run
+    end
+    assert String.contains?(result, "Commands Cheatsheet:\n")
   end
 end
