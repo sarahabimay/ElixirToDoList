@@ -27,7 +27,7 @@ defmodule ToDo.ToDoListApp do
   end
 
   def get_new_tasks(tasks, :add) do
-    process_new_task({:add, String.strip(display_get("New Task: "))}, tasks)
+    process_new_task({:add, String.strip(display_get(@new_task_message))}, tasks)
   end
 
   def process_new_task({:add, ""}, tasks) do
