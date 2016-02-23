@@ -20,7 +20,7 @@ defmodule ToDo.MenuOptionsFormatter do
     Enum.map(options, fn(option) ->
       case option do
         %{downcase_command: lc, upcase_command: uc, task_number: false, description: d} -> "[#{lc}#{uc}] #{d}"
-        %{downcase_command: lc, upcase_command: uc, task_number: true, description: d} -> "[#{lc}#{uc}<task_number>] #{d}"
+        %{downcase_command: lc, upcase_command: uc, task_number: true, description: d} -> "[#{lc}#{uc}<space>task_number] #{d}"
         _ -> ""
       end
     end)

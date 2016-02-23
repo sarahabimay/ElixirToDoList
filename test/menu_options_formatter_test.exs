@@ -8,8 +8,8 @@ defmodule MenuOptionsFormatterTest do
       "Commands Cheatsheet:\n" <>
       "[aA] Add New To-Do Tasks\n" <>
       "[bB] List All Tasks\n" <>
-      "[cC<task_number>] Edit Task\n" <>
-      "[dD<task_number>] Delete Task\n" <>
+      "[cC<space>task_number] Edit Task\n" <>
+      "[dD<space>task_number] Delete Task\n" <>
       "[eE] Exit\n"
 
       {:ok, menu_options: menu}
