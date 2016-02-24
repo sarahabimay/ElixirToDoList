@@ -10,10 +10,10 @@ defmodule ToDo.ConsoleDisplay do
   end
 
   def display_get(message) do
-    IO.gets message
+    IO.gets(message)
   end
 
   def display_put(message) do
-    IO.puts message
+    IO.puts(message)
   end
 end
