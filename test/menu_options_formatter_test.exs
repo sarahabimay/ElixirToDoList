@@ -1,7 +1,6 @@
 defmodule MenuOptionsFormatterTest do
   use ExUnit.Case
   doctest ToDo
-  import ToDo.MenuOptionsFormatter
 
   setup do
     menu =
@@ -16,6 +15,6 @@ defmodule MenuOptionsFormatterTest do
   end
 
   test "command menu options for display", context do
-    assert menu_options_for_display == context[:menu_options]
+    assert ToDo.MenuOptionsFormatter.menu_options_for_display == context[:menu_options]
   end
 end

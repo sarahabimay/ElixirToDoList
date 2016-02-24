@@ -1,5 +1,4 @@
 defmodule ToDo.DeleteTaskCommand do
-
   def delete_task(task_number, tasks) when is_integer(task_number) do
     delete_task(Integer.to_string(task_number), tasks)
   end

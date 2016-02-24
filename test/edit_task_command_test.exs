@@ -1,6 +1,5 @@
 defmodule ToDo.EditTaskCommandTest do
   use ExUnit.Case
-  import ToDo.EditTaskCommand
   doctest ToDo
 
   setup do
@@ -15,6 +14,6 @@ defmodule ToDo.EditTaskCommandTest do
     task_number1 = "1"
     amended_task = "Be more careful."
     expected_result = [amended_task, context[:task2], context[:task3]]
-    assert edit_task(task_number1, amended_task, context[:task_list]) == expected_result
+    assert ToDo.EditTaskCommand.edit_task(task_number1, amended_task, context[:task_list]) == expected_result
   end
 end

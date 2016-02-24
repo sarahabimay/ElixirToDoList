@@ -1,24 +1,21 @@
 defmodule ToDo.ToDoListApp do
-  import ToDo.CommandHandler
-  import ToDo.ConsoleDisplay
-
   @goodbye_message "Thanks for playing! Tasks are NOT persisted!"
   @new_task_message "New Task: "
   @amend_message "Amend task > "
   @invalid_message "Invalid Option Entered"
 
   def todo_list_run({:exit}) do
-    display_put(@goodbye_message)
+    ToDo.ConsoleDisplay.display_put(@goodbye_message)
   end
 
   def todo_list_run({:list_tasks, tasks}) do
-    display_get("Enter any key for menu options")
+    ToDo.ConsoleDisplay.display_get("Enter any key for menu options")
     todo_list_run(tasks)
   end
 
   def todo_list_run(tasks) do
-    display_to_do_list_and_cheatsheet(tasks)
-    prompt_for_command
+    ToDo.ConsoleDisplay.display_to_do_list_and_cheatsheet(tasks)
+    ToDo.ConsoleDisplay.prompt_for_command
     |> option_to_command(tasks)
     |> process_command(tasks)
     |> todo_list_run
@@ -29,17 +26,18 @@ defmodule ToDo.ToDoListApp do
   end
 
   def process_command(:list_tasks, tasks) do
-    action_command({:list_tasks}, tasks)
-    |> display_put
+    ToDo.CommandHandler.action_command({:list_tasks}, tasks)
+    |> ToDo.ConsoleDisplay.display_put
     {:list_tasks, tasks}
   end
 
   def process_command({:edit, task_number}, tasks) do
-   action_command({:edit, task_number, String.strip(display_get("#{@amend_message}"))}, tasks)
+    amended_text = String.strip(ToDo.ConsoleDisplay.display_get("#{@amend_message}"))
+    ToDo.CommandHandler.action_command({:edit, task_number, amended_text}, tasks)
   end
 
   def process_command({:delete, task_number}, tasks) do
-   action_command({:delete, task_number}, tasks)
+   ToDo.CommandHandler.action_command({:delete, task_number}, tasks)
   end
 
   def process_command(:add, tasks) do
@@ -47,7 +45,8 @@ defmodule ToDo.ToDoListApp do
   end
 
   def get_new_tasks(tasks, :add) do
-    process_new_task({:add, String.strip(display_get(@new_task_message))}, tasks)
+    new_task = String.strip(ToDo.ConsoleDisplay.display_get(@new_task_message))
+    process_new_task({:add, new_task}, tasks)
   end
 
   def process_new_task({:add, ""}, tasks) do
@@ -55,7 +54,7 @@ defmodule ToDo.ToDoListApp do
   end
 
   def process_new_task(new_task, tasks) do
-    action_command(new_task, tasks)
+    ToDo.CommandHandler.action_command(new_task, tasks)
     |> get_new_tasks(:add)
   end
 
@@ -80,7 +79,7 @@ defmodule ToDo.ToDoListApp do
   end
 
   def option_to_command(_, tasks) do
-    display_put("#{@invalid_message}")
+    ToDo.ConsoleDisplay.display_put("#{@invalid_message}")
     todo_list_run(tasks)
   end
 end
