@@ -21,6 +21,10 @@ defmodule ToDo.ToDoListApp do
     {:exit}
   end
 
+  def process_command({:edit, task_number}, tasks) do
+   action_command({:edit, task_number, String.strip(display_get("Amend task > "))}, tasks)
+  end
+
   def process_command({:delete, task_number}, tasks) do
    action_command({:delete, task_number}, tasks)
   end
@@ -50,8 +54,8 @@ defmodule ToDo.ToDoListApp do
    :list_all
   end
 
-  def option_to_command("c", _) do
-   :edit
+  def option_to_command("c" <> rest, _) do
+   {:edit, String.strip(rest)}
   end
 
   def option_to_command("d" <> rest, _) do

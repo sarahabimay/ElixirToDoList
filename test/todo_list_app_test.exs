@@ -4,6 +4,14 @@ defmodule ToDoListAppTest do
   import ToDo.ToDoListApp
   doctest ToDo
 
+  setup do
+    task1 = "Buy presents"
+    task2 = "Make a cake"
+    task3 = "Get party hats"
+    task_list = [task1, task2, task3]
+    {:ok, task1: task1, task2: task2, task3: task3, tasks: task_list}
+  end
+
   test "it maps '9' to nothing" do
     option = "9"
     user_input = "e\n"
@@ -16,6 +24,13 @@ defmodule ToDoListAppTest do
     option = "a"
     capture_io(fn ->
       assert option_to_command(option, []) == :add
+    end)
+  end
+
+  test "it maps 'c' menu option to ':edit' command" do
+    option = "c 1"
+    capture_io(fn ->
+      assert option_to_command(option, []) == {:edit, "1"}
     end)
   end
 
@@ -42,13 +57,18 @@ defmodule ToDoListAppTest do
     end)
   end
 
-  test "it can delete a task with the delete command" do
+  test "it can edit a task with the edit command", context do
     task_number = 1
-    task1 = "Buy presents"
-    task2 = "Make a cake"
-    task3 = "Get party hats"
-    task_list = [task1, task2, task3]
-    assert process_command({:delete, task_number}, task_list) == [task2, task3]
+    new_text = "New text"
+    user_input = "#{new_text}\ne"
+    capture_io([input: user_input], fn ->
+      assert process_command({:edit, task_number}, context[:tasks]) == [new_text, context[:task2], context[:task3]]
+    end)
+  end
+
+  test "it can delete a task with the delete command", context do
+    task_number = 1
+    assert process_command({:delete, task_number}, context[:tasks]) == [context[:task2], context[:task3]]
   end
 
   test "user enters two tasks then quits" do
