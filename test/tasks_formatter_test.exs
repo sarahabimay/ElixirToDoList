@@ -6,13 +6,12 @@ defmodule TasksFormatterTest do
   setup do
     task1 = "Go to yoga tonight"
     task2 = "make to do list app"
-
     tasks = [ task1, task2 ]
 
-    empty_for_display = "\nTo Do List:\n\n"
-
+    heading = "Your To Do List:"
+    empty_for_display = "\n#{heading}\n\n"
     tasks_for_display =
-      "\nTo Do List:\n" <>
+      "\n#{heading}\n" <>
      "[1] #{task1}\n" <>
      "[2] #{task2}\n"
 

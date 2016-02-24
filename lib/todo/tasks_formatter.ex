@@ -1,4 +1,6 @@
 defmodule ToDo.TasksFormatter do
+  @heading "Your To Do List:"
+
   def tasks_for_display(tasks) do
     numbered_tasks(tasks)
     |> todo_list_for_display
@@ -17,7 +19,7 @@ defmodule ToDo.TasksFormatter do
   end
 
   defp append_to_do_heading(display_tasks) do
-    "\nTo Do List:\n#{display_tasks}"
+    "\n#{@heading}\n#{display_tasks}"
   end
 
   defp append_newline(command_display) do

@@ -4,9 +4,16 @@ defmodule ToDo.ToDoListApp do
 
   @goodbye_message "Thanks for playing! Tasks are NOT persisted!"
   @new_task_message "New Task: "
+  @amend_message "Amend task > "
+  @invalid_message "Invalid Option Entered"
 
   def todo_list_run({:exit}) do
     display_put(@goodbye_message)
+  end
+
+  def todo_list_run({:list_tasks, tasks}) do
+    display_get("Enter any key for menu options")
+    todo_list_run(tasks)
   end
 
   def todo_list_run(tasks) do
@@ -21,8 +28,14 @@ defmodule ToDo.ToDoListApp do
     {:exit}
   end
 
+  def process_command(:list_tasks, tasks) do
+    action_command({:list_tasks}, tasks)
+    |> display_put
+    {:list_tasks, tasks}
+  end
+
   def process_command({:edit, task_number}, tasks) do
-   action_command({:edit, task_number, String.strip(display_get("Amend task > "))}, tasks)
+   action_command({:edit, task_number, String.strip(display_get("#{@amend_message}"))}, tasks)
   end
 
   def process_command({:delete, task_number}, tasks) do
@@ -51,7 +64,7 @@ defmodule ToDo.ToDoListApp do
   end
 
   def option_to_command("b", _) do
-   :list_all
+   :list_tasks
   end
 
   def option_to_command("c" <> rest, _) do
@@ -67,7 +80,7 @@ defmodule ToDo.ToDoListApp do
   end
 
   def option_to_command(_, tasks) do
-    display_put("Invalid Option Entered")
+    display_put("#{@invalid_message}")
     todo_list_run(tasks)
   end
 end
