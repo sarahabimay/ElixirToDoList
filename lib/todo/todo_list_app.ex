@@ -14,16 +14,19 @@ defmodule ToDo.ToDoListApp do
     prompt_for_command
     |> option_to_command(tasks)
     |> process_command(tasks)
+    |> todo_list_run
   end
 
   def process_command(:exit, _) do
-    todo_list_run({:exit})
+    {:exit}
+  end
+
+  def process_command({:delete, task_number}, tasks) do
+   action_command({:delete, task_number}, tasks)
   end
 
   def process_command(:add, tasks) do
     get_new_tasks(tasks, :add)
-    |>
-    todo_list_run
   end
 
   def get_new_tasks(tasks, :add) do
@@ -36,8 +39,7 @@ defmodule ToDo.ToDoListApp do
 
   def process_new_task(new_task, tasks) do
     action_command(new_task, tasks)
-    |>
-    get_new_tasks(:add)
+    |> get_new_tasks(:add)
   end
 
   def option_to_command("a", _) do
@@ -52,8 +54,8 @@ defmodule ToDo.ToDoListApp do
    :edit
   end
 
-  def option_to_command("d", _) do
-   :delete
+  def option_to_command("d" <> rest, _) do
+   {:delete, String.strip(rest)}
   end
 
   def option_to_command("e", _) do

@@ -5,8 +5,9 @@ defmodule AddTasksCommandTest do
 
   test "add new task" do
     new_task = "Buy groceries"
-    all_tasks = []
-    new_tasks = add_task(all_tasks, new_task)
-    assert List.flatten(new_tasks) == [new_task]
+    task1 = "Cook soup"
+    task2 = "Eat soup"
+    all_tasks = [task1, task2]
+    assert add_task(all_tasks, new_task) == [new_task, task1, task2]
   end
 end
