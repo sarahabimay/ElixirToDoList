@@ -1,5 +1,5 @@
 defmodule ToDo.Runner do
-  def main do
+  def main(argv) do
     tasks = []
     ToDo.ToDoListApp.options(tasks)
   end
