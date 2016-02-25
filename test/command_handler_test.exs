@@ -19,14 +19,26 @@ defmodule CommandHandlerTest do
 
   test "it has a 'delete task' command", context do
     task_number1 = 1
-    assert action_command({:delete, task_number1}, context[:tasks]) == [context[:task2], context[:task3]]
+    expected_results = [context[:task2], context[:task3]]
+    assert action_command({:delete, task_number1}, context[:tasks]) == expected_results
+  end
+
+  test "it has a 'list all tasks' command", context do
+    heading = "\nYour To Do List:\n"
+    task1 = "[1] #{context[:task1]}\n"
+    task2 = "[2] #{context[:task2]}\n"
+    task3 = "[3] #{context[:task3]}\n"
+
+    expected_display = heading <> task1 <> task2 <> task3
+    assert action_command({:list_tasks}, context[:tasks]) == expected_display
   end
 
   test "it has an 'edit task' command", context do
     task_number1 = 1
     new_text = "Buy Lego"
-    assert action_command({:edit, task_number1, new_text}, context[:tasks]) == [new_text, context[:task2], context[:task3]]
-  end
+    expected_result = [new_text, context[:task2], context[:task3]]
+    assert action_command({:edit, task_number1, new_text}, context[:tasks]) == expected_result
+    end
 
   test "ignores unrecognized command" do
     tasks = ""

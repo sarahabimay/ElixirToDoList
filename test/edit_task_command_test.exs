@@ -14,6 +14,7 @@ defmodule ToDo.EditTaskCommandTest do
   test "it changes a selected task", context do
     task_number1 = "1"
     amended_task = "Be more careful."
-    assert edit_task(task_number1, amended_task, context[:task_list]) == [amended_task, context[:task2], context[:task3]]
+    expected_result = [amended_task, context[:task2], context[:task3]]
+    assert edit_task(task_number1, amended_task, context[:task_list]) == expected_result
   end
 end
