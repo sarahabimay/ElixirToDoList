@@ -2,7 +2,7 @@ defmodule AddTasksCommandTest do
   use ExUnit.Case
   doctest ToDo
 
-  test "add new task" do
+  test "it can add new task" do
     new_task = "Buy groceries"
     task1 = "Cook soup"
     task2 = "Eat soup"

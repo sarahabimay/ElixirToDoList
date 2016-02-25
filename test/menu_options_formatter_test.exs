@@ -2,7 +2,7 @@ defmodule MenuOptionsFormatterTest do
   use ExUnit.Case
   doctest ToDo
 
-  setup do
+  test "command menu options for display" do
     menu =
       "Commands Cheatsheet:\n" <>
       "[aA] Add New To-Do Tasks\n" <>
@@ -11,10 +11,6 @@ defmodule MenuOptionsFormatterTest do
       "[dD<space>task_number] Delete Task\n" <>
       "[eE] Exit\n"
 
-      {:ok, menu_options: menu}
-  end
-
-  test "command menu options for display", context do
-    assert ToDo.MenuOptionsFormatter.menu_options_for_display == context[:menu_options]
+    assert ToDo.MenuOptionsFormatter.menu_options_for_display == menu
   end
 end

@@ -10,7 +10,7 @@ defmodule CommandHandlerTest do
     {:ok, task1: task1, task2: task2, task3: task3, tasks: tasks}
   end
 
-  test "it has an 'add new task' command" do
+  test "it can add a new task" do
     tasks = ""
     new_task = "Buy present for Granny's birthday."
     assert ToDo.CommandHandler.action_command({:add, new_task}, tasks) == ["", new_task]
@@ -22,7 +22,7 @@ defmodule CommandHandlerTest do
     assert ToDo.CommandHandler.action_command({:delete, task_number1}, context[:tasks]) == expected_results
   end
 
-  test "it has a 'list all tasks' command", context do
+  test "it can list all tasks", context do
     heading = "\nYour To Do List:\n"
     task1 = "[1] #{context[:task1]}\n"
     task2 = "[2] #{context[:task2]}\n"
@@ -32,7 +32,7 @@ defmodule CommandHandlerTest do
     assert ToDo.CommandHandler.action_command({:list_tasks}, context[:tasks]) == expected_display
   end
 
-  test "it has an 'edit task' command", context do
+  test "it can edit a task", context do
     task_number1 = 1
     new_text = "Buy Lego"
     expected_result = [new_text, context[:task2], context[:task3]]
