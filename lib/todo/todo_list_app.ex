@@ -3,22 +3,23 @@ defmodule ToDo.ToDoListApp do
   @new_task_message "New Task: "
   @amend_message "Amend task > "
   @invalid_message "Invalid Option Entered"
+  @enter_any_key_message "Enter any key for menu options"
 
-  def todo_list_run({:exit}) do
+  def options({:exit}) do
     ToDo.ConsoleDisplay.display_put(@goodbye_message)
   end
 
-  def todo_list_run({:list_tasks, tasks}) do
-    ToDo.ConsoleDisplay.display_get("Enter any key for menu options")
-    todo_list_run(tasks)
+  def options({:list_tasks, tasks}) do
+    ToDo.ConsoleDisplay.display_get(@enter_any_key_message)
+    options(tasks)
   end
 
-  def todo_list_run(tasks) do
+  def options(tasks) do
     ToDo.ConsoleDisplay.display_to_do_list_and_cheatsheet(tasks)
     ToDo.ConsoleDisplay.prompt_for_command
     |> option_to_command(tasks)
     |> process_command(tasks)
-    |> todo_list_run
+    |> options
   end
 
   def process_command(:exit, _) do
@@ -80,6 +81,6 @@ defmodule ToDo.ToDoListApp do
 
   def option_to_command(_, tasks) do
     ToDo.ConsoleDisplay.display_put("#{@invalid_message}")
-    todo_list_run(tasks)
+    options(tasks)
   end
 end
