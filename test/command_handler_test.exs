@@ -1,25 +1,15 @@
 defmodule CommandHandlerTest do
   use ExUnit.Case
-  import ExUnit.CaptureIO
   import ToDo.CommandHandler
   doctest ToDo
 
-  test "valid 'add to-do task' command" do
-    add_command = "a"
+  test "valid 'add new task' command" do
     new_task = "Buy present for Granny's birthday."
-
-    result = capture_io([input: new_task], fn ->
-      input = action_command(add_command)
-      IO.write input
-    end)
-    assert result == "New To-Do Task: > #{new_task}"
+    assert action_command({:add, new_task}, "") == ["", new_task]
   end
 
   test "ignores unrecognized command" do
     invalid_command = "9"
-    result = capture_io(fn ->
-      action_command(invalid_command)
-    end)
-    assert result == "Sorry, I don't recognize that command.\n"
-  end
+    assert action_command({invalid_command}, "") == "Sorry, I don't recognize that command."
+   end
 end

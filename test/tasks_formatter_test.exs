@@ -9,10 +9,10 @@ defmodule TasksFormatterTest do
 
     tasks = [ task1, task2 ]
 
-    empty_for_display = "To Do List:\n\n"
+    empty_for_display = "\nTo Do List:\n\n"
 
     tasks_for_display =
-      "To Do List:\n" <>
+      "\nTo Do List:\n" <>
      "[1] #{task1}\n" <>
      "[2] #{task2}\n"
 
