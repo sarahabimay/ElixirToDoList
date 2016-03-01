@@ -45,15 +45,7 @@ defmodule ToDoListAppTest do
     {:ok, task1: task1, task2: task2, task3: task3, tasks: task_list}
   end
 
-  test "captureIO fn works" do
-   user_input = ""
-   option = "a"
-   tasks = []
-   expected = :add
-   IOAssert.assert_with_input(user_input, ToDoListAppAssert.option_to_command(option, tasks, expected))
-  end
-
-  test "it maps '9' to nothing" do
+  test "invalid menu option is ignored" do
    user_input = "e"
    option = "9"
    tasks = []
@@ -61,7 +53,7 @@ defmodule ToDoListAppTest do
    IOAssert.assert_with_input(user_input, ToDoListAppAssert.option_to_command(option, tasks, expected))
   end
 
-  test "it maps 'a' menu option to ':add' command" do
+  test "'a' menu option is valid" do
     user_input = ""
     option = "a"
     tasks = []
@@ -69,7 +61,7 @@ defmodule ToDoListAppTest do
     IOAssert.assert_with_input(user_input, ToDoListAppAssert.option_to_command(option, tasks, expected))
   end
 
-  test "it maps 'b' menu option to ':list_tasks' command" do
+  test "'b' menu option is valid" do
     user_input = ""
     option = "b"
     tasks = []
@@ -77,7 +69,7 @@ defmodule ToDoListAppTest do
     IOAssert.assert_with_input(user_input, ToDoListAppAssert.option_to_command(option, tasks, expected))
   end
 
-  test "it maps 'c' menu option to ':edit' command" do
+  test "'c' menu option is valid" do
     user_input = ""
     option = "c 1"
     tasks = []
@@ -85,7 +77,7 @@ defmodule ToDoListAppTest do
     IOAssert.assert_with_input(user_input, ToDoListAppAssert.option_to_command(option, tasks, expected))
   end
 
-  test "it maps 'd' menu option to ':delete' command" do
+  test "'d' menu option is valid" do
     user_input = ""
     option = "d 1"
     tasks = []
@@ -93,7 +85,7 @@ defmodule ToDoListAppTest do
     IOAssert.assert_with_input(user_input, ToDoListAppAssert.option_to_command(option, tasks, expected))
   end
 
-  test "it maps 'e' menu option to ':exit' command" do
+  test "'e' menu option is valid" do
     user_input = ""
     option = "e"
     tasks = []
@@ -101,7 +93,7 @@ defmodule ToDoListAppTest do
     IOAssert.assert_with_input(user_input, ToDoListAppAssert.option_to_command(option, tasks, expected))
   end
 
-  test "it can add new tasks with the add command" do
+  test "it can add new tasks" do
     tasks = []
     new_task1 = "Finish Todo List"
     new_task2 = "Add delete task"
@@ -110,7 +102,14 @@ defmodule ToDoListAppTest do
     IOAssert.assert_with_input(user_input, ToDoListAppAssert.add_new_tasks(tasks, expected_result))
   end
 
-  test "it can list all to do tasks with the list_tasks command", context do
+  test "user adds two tasks then quits" do
+    user_input = "a\nFinish Todo List\nWrite blog\n\ne"
+    tasks = []
+    expected_result = :ok
+    IOAssert.assert_with_input(user_input, ToDoListAppAssert.options(tasks, expected_result))
+  end
+
+  test "it can list all to do tasks", context do
     user_input = "\ne"
     command = :list_tasks
     tasks = context[:tasks]
@@ -119,7 +118,7 @@ defmodule ToDoListAppTest do
     IOAssert.assert_with_input(user_input, ToDoListAppAssert.process_command(command, tasks, expected_result))
   end
 
-  test "it can edit a task with the edit command", context do
+  test "it can edit a task", context do
     task_number = 1
     command = {:edit, task_number}
     tasks = context[:tasks]
@@ -129,7 +128,7 @@ defmodule ToDoListAppTest do
     IOAssert.assert_with_input(user_input, ToDoListAppAssert.process_command(command, tasks, expected_result))
   end
 
-  test "it can delete a task with the delete command", context do
+  test "it can delete a task", context do
     task_number = 1
     command = {:delete, task_number}
     tasks = context[:tasks]
@@ -137,12 +136,5 @@ defmodule ToDoListAppTest do
     user_input = "#{new_text}\ne"
     expected_result = [context[:task2], context[:task3]]
     IOAssert.assert_with_input(user_input, ToDoListAppAssert.process_command(command, tasks, expected_result))
-  end
-
-  test "user enters two tasks then quits" do
-    user_input = "a\nFinish Todo List\nWrite blog\n\ne"
-    tasks = []
-    expected_result = :ok
-    IOAssert.assert_with_input(user_input, ToDoListAppAssert.options(tasks, expected_result))
   end
 end

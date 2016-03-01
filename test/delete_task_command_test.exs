@@ -16,7 +16,7 @@ defmodule DeleteTaskCommandTest do
     assert ToDo.DeleteTaskCommand.delete_task(task_number1, context[:task_list]) == expected_result
   end
 
-  test "it returns unchanged task list for invalid task_number", context do
+  test "it returns unchanged task list for invalid string", context do
     invalid_task_number = "9"
     expected_result = [context[:task1], context[:task2], context[:task3]]
     assert ToDo.DeleteTaskCommand.delete_task(invalid_task_number, context[:task_list]) == expected_result
