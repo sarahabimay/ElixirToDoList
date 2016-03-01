@@ -1,6 +1,5 @@
 defmodule DeleteTaskCommandTest do
   use ExUnit.Case
-  import ToDo.DeleteTaskCommand
   doctest ToDo
 
   setup do
@@ -14,18 +13,18 @@ defmodule DeleteTaskCommandTest do
   test "it removes a task from task list", context do
     task_number1 = "1"
     expected_result = [context[:task2], context[:task3]]
-    assert delete_task(task_number1, context[:task_list]) == expected_result
+    assert ToDo.DeleteTaskCommand.delete_task(task_number1, context[:task_list]) == expected_result
   end
 
   test "it returns unchanged task list for invalid task_number", context do
     invalid_task_number = "9"
     expected_result = [context[:task1], context[:task2], context[:task3]]
-    assert delete_task(invalid_task_number, context[:task_list]) == expected_result
+    assert ToDo.DeleteTaskCommand.delete_task(invalid_task_number, context[:task_list]) == expected_result
   end
 
   test "it returns unchanged task list for invalid integer", context do
     invalid_task_number = 0
     expected_result = [context[:task1], context[:task2], context[:task3]]
-    assert delete_task(invalid_task_number, context[:task_list]) == expected_result
+    assert ToDo.DeleteTaskCommand.delete_task(invalid_task_number, context[:task_list]) == expected_result
   end
 end
