@@ -7,11 +7,11 @@ defmodule ToDo.MenuOptionsFormatter do
   end
 
   def menu_options_content do
-    [ %{downcase_command: "a", upcase_command: "A", task_number: false, description: "Add New To-Do Tasks"},
-      %{downcase_command: "b", upcase_command: "B", task_number: false, description: "List All Tasks"},
-      %{downcase_command: "c", upcase_command: "C", task_number: true, description: "Edit Task"},
-      %{downcase_command: "d", upcase_command: "D", task_number: true, description: "Delete Task"},
-      %{downcase_command: "e", upcase_command: "E", task_number: false, description: "Exit"}
+    [ %{commands: "aA", task_number: false, description: "Add New To-Do Tasks"},
+      %{commands: "bB", task_number: false, description: "List All Tasks"},
+      %{commands: "cC", task_number: true, description: "Edit Task"},
+      %{commands: "dD", task_number: true, description: "Delete Task"},
+      %{commands: "eE", task_number: false, description: "Exit"}
     ]
   end
 
@@ -19,8 +19,8 @@ defmodule ToDo.MenuOptionsFormatter do
     ["Commands Cheatsheet:"] ++
     Enum.map(options, fn(option) ->
       case option do
-        %{downcase_command: lc, upcase_command: uc, task_number: false, description: d} -> "[#{lc}#{uc}] #{d}"
-        %{downcase_command: lc, upcase_command: uc, task_number: true, description: d} -> "[#{lc}#{uc}<space>task_number] #{d}"
+        %{commands: commands, task_number: true, description: d} -> "[#{commands}<space>task_number] #{d}"
+        %{commands: commands, task_number: _, description: d} -> "[#{commands}] #{d}"
         _ -> ""
       end
     end)
