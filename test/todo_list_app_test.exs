@@ -30,9 +30,9 @@ defmodule ToDoListAppTest do
       end
     end
 
-    def todo_list_run(tasks, expected_result) do
+    def options(tasks, expected_result) do
       fn ->
-        assert ToDo.ToDoListApp.todo_list_run(tasks) == expected_result
+        assert ToDo.ToDoListApp.options(tasks) == expected_result
       end
     end
   end
@@ -143,6 +143,6 @@ defmodule ToDoListAppTest do
     user_input = "a\nFinish Todo List\nWrite blog\n\ne"
     tasks = []
     expected_result = :ok
-    IOAssert.assert_with_input(user_input, ToDoListAppAssert.todo_list_run(tasks, expected_result))
+    IOAssert.assert_with_input(user_input, ToDoListAppAssert.options(tasks, expected_result))
   end
 end
