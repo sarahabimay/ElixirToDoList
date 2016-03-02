@@ -1,5 +1,4 @@
 defmodule ToDo.ToDoListApp do
-
   def run({:exit}) do
     ToDo.ConsoleDisplay.say_goodbye
   end

@@ -1,14 +1,9 @@
 defmodule ToDo.DeleteTask do
-  def delete_task(task_number, tasks) when is_integer(task_number) do
-    delete_task(Integer.to_string(task_number), tasks)
+  def delete_task(task_number, tasks) do
+    ToDo.CommandHelper.apply_command_to_task(task_number, tasks, delete)
   end
 
-  def delete_task(task_number, tasks) do
-    number_of_tasks =  tuple_size(List.to_tuple(tasks))
-    case Integer.parse(task_number) do
-      {number, ""} when number in 1..number_of_tasks -> List.delete_at(tasks, number - 1)
-      {_, _} -> tasks
-      :error -> tasks
-    end
+  def delete do
+    fn(tasks, task_number) -> List.delete_at(tasks, task_number - 1) end
   end
 end

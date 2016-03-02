@@ -17,7 +17,7 @@ defmodule CommandHandlerTest do
   end
 
   test "it has a 'delete task' command", context do
-    task_number1 = 1
+    task_number1 = "1"
     expected_results = [context[:task2], context[:task3]]
     assert ToDo.CommandHandler.action_command({:delete, task_number1}, context[:tasks]) == expected_results
   end
@@ -33,7 +33,7 @@ defmodule CommandHandlerTest do
   end
 
   test "it can edit a task", context do
-    task_number1 = 1
+    task_number1 = "1"
     new_text = "Buy Lego"
     expected_result = [new_text, context[:task2], context[:task3]]
     assert ToDo.CommandHandler.action_command({:edit, task_number1, new_text}, context[:tasks]) == expected_result

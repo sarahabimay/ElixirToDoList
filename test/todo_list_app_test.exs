@@ -58,7 +58,7 @@ defmodule ToDoListAppTest do
   end
 
   test "it can edit a task", context do
-    task_number = 1
+    task_number = "1"
     command = {:edit, task_number}
     tasks = context[:tasks]
     new_text = "New text"
@@ -68,7 +68,7 @@ defmodule ToDoListAppTest do
   end
 
   test "it can delete a task", context do
-    task_number = 1
+    task_number = "1"
     command = {:delete, task_number}
     tasks = context[:tasks]
     new_text = "New text"
