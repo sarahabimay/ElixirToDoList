@@ -32,6 +32,6 @@ defmodule ToDo.Mixfile do
   end
 
   defp escript_config do
-    [main_module: ToDo.Runner]
+    [main_module: ToDo]
   end
 end
