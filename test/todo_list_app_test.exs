@@ -12,28 +12,16 @@ defmodule ToDoListAppTest do
   end
 
   defmodule ToDoListAppAssert do
-    def option_to_command(option, tasks, expected) do
-      fn ->
-        assert ToDo.ToDoListApp.option_to_command(option, tasks) == expected
-      end
-    end
-
     def add_new_tasks(tasks, expected_result) do
-      fn ->
-        assert ToDo.ToDoListApp.get_new_tasks(tasks, :add) == expected_result
-      end
+      fn -> assert ToDo.ToDoListApp.get_new_tasks(tasks, :add) == expected_result end
     end
 
     def process_command(command, tasks, expected_result) do
-      fn ->
-        assert ToDo.ToDoListApp.process_command(command, tasks) == expected_result
-      end
+      fn -> assert ToDo.ToDoListApp.process_command(command, tasks) == expected_result end
     end
 
-    def options(tasks, expected_result) do
-      fn ->
-        assert ToDo.ToDoListApp.options(tasks) == expected_result
-      end
+    def run(tasks, expected_result) do
+      fn -> assert ToDo.ToDoListApp.run(tasks) == expected_result end
     end
   end
 
@@ -43,54 +31,6 @@ defmodule ToDoListAppTest do
     task3 = "Get party hats"
     task_list = [task1, task2, task3]
     {:ok, task1: task1, task2: task2, task3: task3, tasks: task_list}
-  end
-
-  test "invalid menu option is ignored" do
-   user_input = "e"
-   option = "9"
-   tasks = []
-   expected = :ok
-   IOAssert.assert_with_input(user_input, ToDoListAppAssert.option_to_command(option, tasks, expected))
-  end
-
-  test "'a' menu option is valid" do
-    user_input = ""
-    option = "a"
-    tasks = []
-    expected = :add
-    IOAssert.assert_with_input(user_input, ToDoListAppAssert.option_to_command(option, tasks, expected))
-  end
-
-  test "'b' menu option is valid" do
-    user_input = ""
-    option = "b"
-    tasks = []
-    expected = :list_tasks
-    IOAssert.assert_with_input(user_input, ToDoListAppAssert.option_to_command(option, tasks, expected))
-  end
-
-  test "'c' menu option is valid" do
-    user_input = ""
-    option = "c 1"
-    tasks = []
-    expected = {:edit, "1"}
-    IOAssert.assert_with_input(user_input, ToDoListAppAssert.option_to_command(option, tasks, expected))
-  end
-
-  test "'d' menu option is valid" do
-    user_input = ""
-    option = "d 1"
-    tasks = []
-    expected = {:delete, "1"}
-    IOAssert.assert_with_input(user_input, ToDoListAppAssert.option_to_command(option, tasks, expected))
-  end
-
-  test "'e' menu option is valid" do
-    user_input = ""
-    option = "e"
-    tasks = []
-    expected = :exit
-    IOAssert.assert_with_input(user_input, ToDoListAppAssert.option_to_command(option, tasks, expected))
   end
 
   test "it can add new tasks" do
@@ -106,7 +46,7 @@ defmodule ToDoListAppTest do
     user_input = "a\nFinish Todo List\nWrite blog\n\ne"
     tasks = []
     expected_result = :ok
-    IOAssert.assert_with_input(user_input, ToDoListAppAssert.options(tasks, expected_result))
+    IOAssert.assert_with_input(user_input, ToDoListAppAssert.run(tasks, expected_result))
   end
 
   test "it can list all to do tasks", context do
@@ -114,7 +54,6 @@ defmodule ToDoListAppTest do
     command = :list_tasks
     tasks = context[:tasks]
     expected_result = {:list_tasks, [context[:task1], context[:task2], context[:task3]]}
-
     IOAssert.assert_with_input(user_input, ToDoListAppAssert.process_command(command, tasks, expected_result))
   end
 
