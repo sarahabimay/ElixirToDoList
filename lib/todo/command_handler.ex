@@ -31,19 +31,19 @@ defmodule ToDo.CommandHandler do
   end
 
   def action_command({:add, new_task}, previous_state) do
-    ToDo.AddTasksCommand.add_task(new_task, previous_state)
+    ToDo.AddTasks.add_task(new_task, previous_state)
   end
 
   def action_command({:list_tasks}, previous_state) do
-    ToDo.ListTasksCommand.list_tasks(previous_state)
+    ToDo.ListTasks.list_tasks(previous_state)
   end
 
   def action_command({:edit, task_number, amended_text}, previous_state) do
-    ToDo.EditTaskCommand.edit_task(task_number, amended_text, previous_state)
+    ToDo.EditTask.edit_task(task_number, amended_text, previous_state)
   end
 
   def action_command({:delete, task_number}, previous_state) do
-    ToDo.DeleteTaskCommand.delete_task(task_number, previous_state)
+    ToDo.DeleteTask.delete_task(task_number, previous_state)
   end
 
   def action_command({_}, _) do
@@ -54,7 +54,7 @@ defmodule ToDo.CommandHandler do
     number_of_tasks =  tuple_size(List.to_tuple(tasks))
     case Integer.parse(request) do
       {number, ""} when number in 1..number_of_tasks -> number - 1
-      {number, _} -> tasks
+      {_, _} -> tasks
       :error -> tasks
     end
   end

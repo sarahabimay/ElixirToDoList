@@ -1,4 +1,4 @@
-defmodule ToDo.EditTaskCommandTest do
+defmodule ToDo.EditTaskTest do
   use ExUnit.Case
   doctest ToDo
 
@@ -10,6 +10,6 @@ defmodule ToDo.EditTaskCommandTest do
     task_number1 = "1"
     amended_task = "Be more careful."
     expected_result = [amended_task, task2, task3]
-    assert ToDo.EditTaskCommand.edit_task(task_number1, amended_task, task_list) == expected_result
+    assert ToDo.EditTask.edit_task(task_number1, amended_task, task_list) == expected_result
   end
 end

@@ -1,4 +1,4 @@
-defmodule ToDo.ListTasksCommand do
+defmodule ToDo.ListTasks do
   @heading "Your To Do List:"
 
   def list_tasks(tasks) do

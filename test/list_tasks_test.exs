@@ -7,7 +7,7 @@ defmodule ListTasksTest do
     task2 = "Make a cake"
     task3 = "Get party hats"
     task_list = [task1, task2, task3]
-    assert ToDo.ListTasksCommand.list_tasks(task_list) ==
+    assert ToDo.ListTasks.list_tasks(task_list) ==
       "\nYour To Do List:\n" <>
       "[1] #{task1}\n" <>
       "[2] #{task2}\n" <>
