@@ -5,6 +5,7 @@ defmodule ToDo.TasksFormatter do
     numbered_tasks(tasks)
     |> todo_list_for_display
     |> append_to_do_heading
+    |> prepend_newline
     |> append_newline
   end
 
@@ -19,10 +20,14 @@ defmodule ToDo.TasksFormatter do
   end
 
   defp append_to_do_heading(display_tasks) do
-    "\n#{@heading}\n#{display_tasks}"
+    "#{@heading}\n#{display_tasks}"
   end
 
-  defp append_newline(command_display) do
-    command_display <> "\n"
+  defp prepend_newline(to_output) do
+    "\n" <> to_output
+  end
+
+  defp append_newline(to_output) do
+    to_output <> "\n"
   end
 end

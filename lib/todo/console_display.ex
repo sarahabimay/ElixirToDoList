@@ -2,8 +2,8 @@ defmodule ToDo.ConsoleDisplay do
   @goodbye_message "Thanks for playing! Tasks are NOT persisted!"
   @new_task_message "New Task: "
   @amend_message "Amend task > "
-  @invalid_message "Invalid Option Entered"
-  @enter_any_key_message "Enter any key for menu options"
+  @invalid_message "Invalid Option Entered!"
+  @enter_any_key_message "Enter any key for menu options: "
   @prompt "> "
 
   def display_to_do_list_and_cheatsheet(tasks) do
