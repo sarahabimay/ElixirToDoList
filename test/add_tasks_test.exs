@@ -1,4 +1,4 @@
-defmodule AddTasksCommandTest do
+defmodule AddTasksTest do
   use ExUnit.Case
   doctest ToDo
 
@@ -8,6 +8,6 @@ defmodule AddTasksCommandTest do
     task2 = "Eat soup"
     all_tasks = [task1, task2]
     expected_result = [new_task, task1, task2]
-    assert ToDo.AddTasksCommand.add_task(all_tasks, new_task) == expected_result
+    assert ToDo.AddTasks.add_task(all_tasks, new_task) == expected_result
   end
 end
